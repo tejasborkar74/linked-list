@@ -1,0 +1,216 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+int data;
+struct node* next;
+};
+int length(struct node* head)
+{
+    int len=0;
+    while(head!=NULL)
+    {
+        head=head->next;
+        len+=1;
+    }
+    return len;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+struct node* insertathead(struct node* head,int data){
+
+struct node* nn;
+nn =(struct node*) malloc(sizeof(struct node));
+nn->data = data;
+nn->next = head;
+
+return nn;
+}
+
+struct node* insertattail(struct node* head,int data)
+{
+    if(head==NULL)
+    {
+        struct node* nn;
+        nn =(struct node*) malloc(sizeof(struct node));
+        nn->data=data;
+        nn->next=NULL;
+        return nn;
+    }
+    else
+    {
+        struct node* tail=head;
+        while(tail->next!=NULL)
+        {
+            tail=tail->next;
+        }
+        struct node* nn;
+        nn=(struct node*) malloc(sizeof(struct node));
+        nn->data=data;
+        tail->next=nn;
+        nn->next =NULL;
+        return head;
+    }
+}
+struct node* insertatmid(struct node* head,int p,int data)
+{
+    if(head==NULL||p==0)
+        insertathead(head,data);
+    else if(p>=length(head))
+        insertattail(head,data);
+    else
+    {
+        int jump=1;
+        struct node* temp=head;
+        while(jump<=p-1)
+        {
+            temp=temp->next;
+            jump++;
+        }
+        struct node* nn=(struct node*) malloc(sizeof(struct node));
+        nn->data=data;
+        nn->next= temp->next;
+        temp->next=nn;
+        return head;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+int isempty(struct node *p)
+{
+    if(p==NULL)
+        return 1;
+    else
+        return 0;
+}
+
+
+struct node* deleteathead(struct node* head){
+
+    if(isempty(head)){
+        return head;
+    }
+else{
+struct node* nn = head;
+head = head->next;
+
+printf("Removed node is %d\n",nn->data);
+delete nn;
+return head;
+}
+}
+
+
+
+struct node* deleteattail(struct node* head){    //at tail
+
+    if(isempty(head)){
+        return head;
+    }
+
+else{
+struct node* temp = head;
+struct node* pre=NULL;
+while(temp->next!=NULL)
+{
+    pre=temp;
+    temp=temp->next;
+}
+
+printf("Removed node is %d\n",temp->data);
+free(temp);
+pre->next=NULL;
+return head;
+}
+}
+
+
+struct node* deleteatmid(struct node *head,int n)
+{
+    if(head==NULL||n>length(head))
+        return head;
+    else if(n==0)
+        deleteathead(head);
+    else if(n==length(head)-1)
+        deleteattail(head);
+    else{
+        int jump=1;
+        node *pre=head;
+        while(jump<=n-1)
+        {
+            pre=pre->next;
+            jump++;
+        }
+        struct node *temp=pre->next;
+        pre->next=temp->next;
+        free(temp);
+        return head;
+    }
+
+}
+////////////////////////////////////////////////////////////////////////
+void display(struct node*head){
+printf("\n");
+while(head!=NULL){
+    printf("%d\t",head->data);
+    head=head->next;
+}
+
+
+
+}
+////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+//SEARCH AND DELETE/////
+struct node* searchdelete(struct node* head,int d)
+{
+ struct node *p=head,*q=NULL;
+ while(p!=NULL&&p->data!=d)
+ {
+     q->next=p;
+     p=p->next;
+ }
+ if(p==NULL)
+ {
+     printf("element not found");
+ }
+ else if(q==NULL)
+ {
+     head=p->next;
+     free(p);
+ }
+ else{
+    q->next=p->next;
+    free(p);
+ }
+ return head;
+
+}
+
+int main(){
+
+struct node* head = NULL;
+
+head = insertattail(head,50);
+head = insertattail(head,40);
+head = insertattail(head,30);
+head = insertattail(head,20);
+head = insertattail(head,10);
+head = deleteathead(head);
+head= deleteattail(head);
+display(head);
+head= deleteatmid(head,2);
+display(head);
+head=insertathead(head,80);
+head=insertathead(head,90);
+display(head);
+head=insertatmid(head,2,10);
+display(head);
+
+head=searchdelete(head,90);
+display(head);
+
+return 0;
+}
+
