@@ -5,6 +5,8 @@ struct node{
 int data;
 struct node* next;
 };
+
+// calculates the size of linked list
 int length(struct node* head)
 {
     int len=0;
@@ -17,6 +19,7 @@ int length(struct node* head)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+// Inserts data at head of Linked List
 struct node* insertathead(struct node* head,int data){
 
 struct node* nn;
@@ -26,7 +29,7 @@ nn->next = head;
 
 return nn;
 }
-
+// Inserts data at tail of Linked List
 struct node* insertattail(struct node* head,int data)
 {
     if(head==NULL)
@@ -52,6 +55,8 @@ struct node* insertattail(struct node* head,int data)
         return head;
     }
 }
+
+// Inserts data at middle of Linked List
 struct node* insertatmid(struct node* head,int p,int data)
 {
     if(head==NULL||p==0)
@@ -76,6 +81,7 @@ struct node* insertatmid(struct node* head,int p,int data)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
+// Checks If linked list is empty
 int isempty(struct node *p)
 {
     if(p==NULL)
@@ -84,7 +90,7 @@ int isempty(struct node *p)
         return 0;
 }
 
-
+// Deletes data at head of Linked List
 struct node* deleteathead(struct node* head){
 
     if(isempty(head)){
@@ -101,7 +107,7 @@ return head;
 }
 
 
-
+// Deletes data at tail of Linked List
 struct node* deleteattail(struct node* head){    //at tail
 
     if(isempty(head)){
@@ -124,7 +130,7 @@ return head;
 }
 }
 
-
+// Deletes data at middle of Linked List
 struct node* deleteatmid(struct node *head,int n)
 {
     if(head==NULL||n>length(head))
@@ -149,6 +155,7 @@ struct node* deleteatmid(struct node *head,int n)
 
 }
 ////////////////////////////////////////////////////////////////////////
+// Displays Linked List
 void display(struct node*head){
 printf("\n");
 while(head!=NULL){
