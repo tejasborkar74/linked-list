@@ -188,29 +188,4 @@ struct node* searchdelete(struct node* head,int d)
 
 }
 
-int main(){
-
-struct node* head = NULL;
-
-head = insertattail(head,50);
-head = insertattail(head,40);
-head = insertattail(head,30);
-head = insertattail(head,20);
-head = insertattail(head,10);
-head = deleteathead(head);
-head= deleteattail(head);
-display(head);
-head= deleteatmid(head,2);
-display(head);
-head=insertathead(head,80);
-head=insertathead(head,90);
-display(head);
-head=insertatmid(head,2,10);
-display(head);
-
-head=searchdelete(head,90);
-display(head);
-
-return 0;
-}
 
